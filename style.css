@@ -1,0 +1,490 @@
+* {
+  box-sizing: border-box;
+  font-family: "Tahoma", "Arial", sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  min-height: 100vh;
+  background: #f7f9fb;
+  color: #1a2b3c;
+  direction: rtl;
+}
+
+/* ===== الهيدر ===== */
+.header {
+  background: #ffffff;
+  border-bottom: 1px solid #e8eef3;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.header-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 16px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logo-icon {
+  width: 42px;
+  height: 42px;
+  background: #d9f2ef;
+  color: #2bb3a3;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+}
+
+.logo-text h1 {
+  font-size: 18px;
+  font-weight: 700;
+  color: #1a2b3c;
+}
+
+.logo-text span {
+  font-size: 12px;
+  color: #7a8b99;
+  letter-spacing: 1px;
+}
+
+.nav {
+  display: flex;
+  gap: 24px;
+}
+
+.nav a {
+  text-decoration: none;
+  color: #4a5a6a;
+  font-size: 15px;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.nav a:hover,
+.nav a.active {
+  color: #2bb3a3;
+}
+
+.cta-btn {
+  background: #ff6b4a;
+  color: #fff;
+  border: none;
+  border-radius: 30px;
+  padding: 10px 22px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.cta-btn:hover {
+  background: #e85a3a;
+  transform: translateY(-2px);
+}
+
+/* ===== المحتوى ===== */
+.main {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 40px 24px;
+}
+
+.screen { display: none; }
+.screen.active { display: block; }
+
+/* ===== شاشة الترحيب ===== */
+.welcome-card {
+  background: #ffffff;
+  border-radius: 24px;
+  padding: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+  flex-wrap: wrap;
+}
+
+.welcome-text {
+  flex: 1;
+  min-width: 280px;
+}
+
+.badge {
+  display: inline-block;
+  background: #e6f7f5;
+  color: #2bb3a3;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+
+.welcome-text h2 {
+  font-size: 30px;
+  color: #1a2b3c;
+  margin-bottom: 14px;
+  line-height: 1.4;
+}
+
+.welcome-text p {
+  font-size: 16px;
+  color: #5a6a7a;
+  line-height: 1.7;
+  margin-bottom: 24px;
+}
+
+.primary-btn {
+  background: #2bb3a3;
+  color: #fff;
+  border: none;
+  border-radius: 30px;
+  padding: 14px 32px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.primary-btn:hover {
+  background: #1f9a8c;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(43,179,163,0.3);
+}
+
+/* ===== الروبوت ===== */
+.robot-wrapper {
+  flex: 0 0 260px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.speech-bubble {
+  position: relative;
+  background: #e6f7f5;
+  color: #1a2b3c;
+  border-radius: 16px;
+  padding: 12px 18px;
+  font-size: 14px;
+  font-weight: 600;
+  max-width: 240px;
+  text-align: center;
+  margin-bottom: 18px;
+  animation: pop 0.4s ease;
+  box-shadow: 0 4px 12px rgba(43,179,163,0.15);
+}
+
+.speech-bubble::after {
+  content: "";
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 10px;
+  border-style: solid;
+  border-color: #e6f7f5 transparent transparent transparent;
+}
+
+@keyframes pop {
+  0% { transform: scale(0.6); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.robot {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+.robot-antenna {
+  width: 60px;
+  height: 14px;
+  background: #2bb3a3;
+  border-radius: 14px 14px 0 0;
+}
+
+.robot-head {
+  width: 140px;
+  height: 120px;
+  background: linear-gradient(180deg, #ffffff 0%, #f0f4f7 100%);
+  border-radius: 50%;
+  position: relative;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+  margin-top: 2px;
+}
+
+.robot-face {
+  position: absolute;
+  top: 22px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 70px;
+  background: #1a1a1a;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 18px;
+}
+
+.eye {
+  width: 22px;
+  height: 18px;
+  background: #4dd0e1;
+  border-radius: 50% 50% 40% 40%;
+  animation: blink 4s infinite;
+  box-shadow: 0 0 12px #4dd0e1;
+}
+
+@keyframes blink {
+  0%, 90%, 100% { transform: scaleY(1); }
+  95% { transform: scaleY(0.1); }
+}
+
+.robot-body {
+  width: 150px;
+  height: 140px;
+  background: linear-gradient(180deg, #ffffff 0%, #f0f4f7 100%);
+  border-radius: 50% 50% 45% 45%;
+  margin-top: -10px;
+  position: relative;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+}
+
+.robot-chest {
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 70px;
+  height: 35px;
+  background: #2bb3a3;
+  border-radius: 0 0 40px 40px;
+}
+
+.mouth {
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 24px;
+  height: 5px;
+  background: #1a2b3c;
+  border-radius: 0 0 12px 12px;
+  transition: all 0.3s ease;
+}
+
+.mouth.happy {
+  height: 12px;
+  border-radius: 0 0 20px 20px;
+}
+
+.mouth.sad {
+  height: 5px;
+  border-radius: 12px 12px 0 0;
+}
+
+.robot.celebrate {
+  animation: jump 0.6s ease;
+}
+
+@keyframes jump {
+  0%, 100% { transform: translateY(0); }
+  30% { transform: translateY(-25px) rotate(-5deg); }
+  60% { transform: translateY(-15px) rotate(5deg); }
+}
+
+.robot.shake {
+  animation: shake 0.5s ease;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-8px); }
+  75% { transform: translateX(8px); }
+}
+
+/* ===== شاشة السؤال ===== */
+.question-card {
+  background: #ffffff;
+  border-radius: 24px;
+  padding: 40px;
+  max-width: 700px;
+  margin: 0 auto;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+}
+
+.progress-bar {
+  height: 8px;
+  background: #eef2f6;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #2bb3a3, #4dd0e1);
+  width: 0%;
+  transition: width 0.4s ease;
+}
+
+.progress-text {
+  font-size: 14px;
+  color: #7a8b99;
+  margin-bottom: 24px;
+  text-align: center;
+}
+
+.question-card h2 {
+  font-size: 24px;
+  color: #1a2b3c;
+  margin-bottom: 24px;
+  text-align: center;
+  line-height: 1.6;
+}
+
+.question-card input {
+  width: 100%;
+  padding: 16px;
+  font-size: 18px;
+  border: 2px solid #e0e8ef;
+  border-radius: 14px;
+  text-align: center;
+  margin-bottom: 20px;
+  transition: border-color 0.2s;
+  background: #f7f9fb;
+}
+
+.question-card input:focus {
+  outline: none;
+  border-color: #2bb3a3;
+  background: #fff;
+}
+
+.buttons {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.hint-btn {
+  background: #fff5ed;
+  color: #ff6b4a;
+  border: 2px solid #ffd9cc;
+  border-radius: 30px;
+  padding: 12px 28px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.hint-btn:hover {
+  background: #ffe8dd;
+}
+
+.feedback {
+  font-size: 17px;
+  font-weight: 600;
+  text-align: center;
+  min-height: 30px;
+  margin-top: 20px;
+}
+
+.feedback.success { color: #2bb3a3; }
+.feedback.error { color: #ff6b4a; }
+
+.help-box {
+  background: #f0faf8;
+  border: 2px dashed #2bb3a3;
+  border-radius: 16px;
+  padding: 20px;
+  margin-top: 20px;
+  text-align: center;
+}
+
+.help-box p {
+  color: #1a2b3c;
+  font-size: 15px;
+  line-height: 1.7;
+  margin-bottom: 16px;
+}
+
+.help-box .primary-btn {
+  font-size: 15px;
+  padding: 12px 24px;
+}
+
+.hidden { display: none; }
+
+/* ===== شاشة الفوز ===== */
+.win-card {
+  background: #ffffff;
+  border-radius: 24px;
+  padding: 60px 40px;
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: center;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+}
+
+.trophy {
+  font-size: 80px;
+  margin-bottom: 20px;
+  animation: bounce 1s infinite;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-15px); }
+}
+
+.win-card h2 {
+  font-size: 28px;
+  color: #1a2b3c;
+  margin-bottom: 12px;
+}
+
+.win-card p {
+  font-size: 16px;
+  color: #5a6a7a;
+  margin-bottom: 28px;
+  line-height: 1.7;
+}
+
+/* ===== الجوال ===== */
+@media (max-width: 700px) {
+  .header-inner { padding: 12px 16px; }
+  .nav { display: none; }
+  .welcome-card { padding: 24px; gap: 24px; }
+  .welcome-text h2 { font-size: 22px; }
+  .question-card { padding: 24px; }
+  .question-card h2 { font-size: 20px; }
+}

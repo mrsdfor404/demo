@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>أبطال الرابع والخامس</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- الهيدر -->
+  <header class="header">
+    <div class="header-inner">
+      <div class="logo">
+        <div class="logo-icon">🎓</div>
+        <div class="logo-text">
+          <h1>أبطال الرابع والخامس</h1>
+          <span>تعلّم • العب • اربح</span>
+        </div>
+      </div>
+      <nav class="nav">
+        <a href="#" class="active">الرئيسية</a>
+        <a href="#">الأسئلة</a>
+        <a href="#">المسابقة</a>
+        <a href="#">عن الموقع</a>
+      </nav>
+      <button class="cta-btn" onclick="startGame()">يلا نبدأ</button>
+    </div>
+  </header>
+
+  <!-- المحتوى -->
+  <main class="main">
+
+    <!-- بطاقة الترحيب + الروبوت -->
+    <section id="welcome-screen" class="screen active">
+      <div class="welcome-card">
+        <div class="welcome-text">
+          <span class="badge">مرحباً بك 👋</span>
+          <h2>جاهز نتحدى اليوم يا بطل؟</h2>
+          <p>٧ أسئلة ممتعة بين العربي والرياضيات، مع روبوت يساعدك ويشجعك خطوة بخطوة.</p>
+          <button class="primary-btn" onclick="startGame()">يلا نبدأ 🚀</button>
+        </div>
+
+        <!-- الروبوت -->
+        <div class="robot-wrapper">
+          <div class="speech-bubble" id="speechBubble">
+            أهلاً يا بطل! جاهز نتحدى؟ 😊
+          </div>
+          <div class="robot" id="robot">
+            <div class="robot-antenna"></div>
+            <div class="robot-head">
+              <div class="robot-face">
+                <div class="eye left"></div>
+                <div class="eye right"></div>
+              </div>
+            </div>
+            <div class="robot-body">
+              <div class="robot-chest"></div>
+              <div class="mouth" id="robotMouth"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- شاشة السؤال -->
+    <section id="question-screen" class="screen">
+      <div class="question-card">
+        <div class="progress-bar">
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
+        <div class="progress-text">سؤال <span id="q-number">1</span> من <span id="q-total">7</span></div>
+
+        <h2 id="question-text">...</h2>
+
+        <input type="text" id="answer-input" placeholder="اكتب جوابك هنا..." />
+
+        <div class="buttons">
+          <button class="primary-btn" onclick="checkAnswer()">تحقق ✅</button>
+          <button class="hint-btn" onclick="showHint()">ساعدني شوي 💡</button>
+        </div>
+
+        <p id="feedback" class="feedback"></p>
+
+        <div id="help-box" class="help-box hidden">
+          <p id="hint-text"></p>
+          <button class="primary-btn" onclick="solveTogether()">شو رأيك نحله سوا؟ 🤝</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- شاشة الفوز -->
+    <section id="win-screen" class="screen">
+      <div class="win-card">
+        <div class="trophy">🏆</div>
+        <h2>برافو عليك يا بطل!</h2>
+        <p>خلصت كل الأسئلة السبعة، إنت بطل حقيقي!</p>
+        <button class="primary-btn" onclick="restart()">بدي أجرب مرة ثانية 🔄</button>
+      </div>
+    </section>
+
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
