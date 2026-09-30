@@ -160,6 +160,7 @@ body {
   font-weight: 600;
   cursor: pointer;
   transition: 0.2s;
+  margin: 4px;
 }
 
 .primary-btn:hover {
@@ -329,6 +330,17 @@ body {
   75% { transform: translateX(8px); }
 }
 
+/* الروبوت يلف حول حاله */
+.robot.spin {
+  animation: spin 1s ease;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg) scale(1); }
+  50% { transform: rotate(360deg) scale(1.15); }
+  100% { transform: rotate(720deg) scale(1); }
+}
+
 /* ===== شاشة السؤال ===== */
 .question-card {
   background: #ffffff;
@@ -359,6 +371,16 @@ body {
   color: #7a8b99;
   margin-bottom: 24px;
   text-align: center;
+}
+
+.subject-label {
+  display: inline-block;
+  background: #e6f7f5;
+  color: #2bb3a3;
+  padding: 2px 10px;
+  border-radius: 10px;
+  font-size: 12px;
+  margin-right: 8px;
 }
 
 .question-card h2 {
@@ -404,6 +426,7 @@ body {
   font-weight: 600;
   cursor: pointer;
   transition: 0.2s;
+  margin: 4px;
 }
 
 .hint-btn:hover {
