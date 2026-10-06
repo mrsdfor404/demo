@@ -4,12 +4,6 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>أبطال الرابع والخامس</title>
-  
-  <!-- Favicon -->
-  <link rel="icon" type="image/png" sizes="32x32" href="favicon.png" />
-  <link rel="icon" type="image/png" sizes="16x16" href="favicon.png" />
-  <link rel="apple-touch-icon" sizes="180x180" href="favicon.png" />
-  
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -17,18 +11,19 @@
   <!-- الهيدر -->
   <header class="header">
     <div class="header-inner">
-      <div class="logo">
+      <div class="logo" onclick="openDeveloperLogin()">
         <img src="logo.jpg" alt="لمدرستي أنتمي" class="logo-img" />
         <div class="logo-text">
           <h1>أبطال الرابع والخامس</h1>
-          <span>تعلّم • العب • اربح</span>
+          <span>تعلم - العب - اربح</span>
         </div>
       </div>
       <nav class="nav">
-        <a href="#" class="active">الرئيسية</a>
-        <a href="#">الأسئلة</a>
-        <a href="#">المسابقة</a>
-        <a href="#">عن الموقع</a>
+        <a href="#" class="active" onclick="showScreen('welcome-screen')">الرئيسية</a>
+        <a href="#" onclick="showAbout()">عن الموقع</a>
+        <a href="#" onclick="showCompetitions()">المسابقات</a>
+        <a href="#" onclick="showDeveloper()">عن المطور</a>
+        <a href="#" onclick="showLicense()">ترخيص الاستخدام</a>
       </nav>
       <button class="cta-btn" onclick="startGame()">يلا نبدأ</button>
     </div>
@@ -41,15 +36,15 @@
     <section id="welcome-screen" class="screen active">
       <div class="welcome-card">
         <div class="welcome-text">
-          <span class="badge">مرحباً بك 👋</span>
+          <span class="badge">مرحبا بك</span>
           <h2>جاهز نتحدى اليوم يا بطل؟</h2>
           <p>أسئلة ممتعة بين العربي والرياضيات، مع روبوت يساعدك ويشجعك خطوة بخطوة.</p>
-          <button class="primary-btn" onclick="startGame()">يلا نبدأ 🚀</button>
+          <button class="primary-btn" onclick="startGame()">يلا نبدأ</button>
         </div>
 
         <div class="robot-wrapper">
           <div class="speech-bubble" id="speechBubble">
-            أهلاً يا بطل! جاهز نتحدى؟ 😊
+            أهلا يا بطل! جاهز نتحدى؟
           </div>
           <div class="robot" id="robot">
             <div class="robot-antenna"></div>
@@ -71,24 +66,48 @@
     <!-- شاشة رقم الصف -->
     <section id="grade-screen" class="screen">
       <div class="question-card">
-        <h2>يا بطل، حط رقم صفك 👇</h2>
+        <h2>يا بطل، اكتب رقم صفك</h2>
         <input type="number" id="grade-input" placeholder="اكتب 4 أو 5..." min="1" max="12" />
         <div class="buttons">
-          <button class="primary-btn" onclick="checkGrade()">تأكيد ✅</button>
+          <button class="primary-btn" onclick="checkGrade()">تأكيد</button>
         </div>
         <p id="grade-feedback" class="feedback"></p>
+      </div>
+    </section>
+
+    <!-- شاشة بيانات الطالب -->
+    <section id="student-info-screen" class="screen">
+      <div class="question-card">
+        <h2>يا بطل، عرفنا عنك</h2>
+        <input type="text" id="student-name" placeholder="اسمك الأول..." />
+        <input type="text" id="student-father" placeholder="اسم أبوك..." />
+        <input type="text" id="student-family" placeholder="اسم العائلة (اختياري)..." />
+        <input type="text" id="student-section" placeholder="شعبتك (أ، ب، ج...)" />
+        <div class="buttons">
+          <button class="primary-btn" onclick="saveStudentInfo()">يلا نبدأ</button>
+        </div>
+        <p id="student-feedback" class="feedback"></p>
       </div>
     </section>
 
     <!-- شاشة اختيار المادة -->
     <section id="subject-screen" class="screen">
       <div class="question-card">
-        <h2>شو بتحب نلعب اليوم؟ 🎮</h2>
+        <h2>شو بتحب نلعب اليوم؟</h2>
         <div class="buttons">
-          <button class="primary-btn" onclick="chooseSubject('arabic')">📖 عربي</button>
-          <button class="primary-btn" onclick="chooseSubject('math')">🔢 رياضيات</button>
+          <button class="primary-btn" onclick="chooseSubject('arabic')">عربي</button>
+          <button class="primary-btn" onclick="chooseSubject('math')">رياضيات</button>
         </div>
-        <p id="subject-feedback" class="feedback"></p>
+      </div>
+    </section>
+
+    <!-- شاشة اختيار المصدر -->
+    <section id="source-screen" class="screen">
+      <div class="question-card">
+        <h2>من وين بتحب الأسئلة؟</h2>
+        <div class="buttons" id="source-buttons">
+          <!-- تتولد من JavaScript -->
+        </div>
       </div>
     </section>
 
@@ -103,9 +122,8 @@
           <span id="subject-label" class="subject-label"></span>
         </div>
 
-        <!-- إشارة الكتاب -->
         <div id="book-reference" class="book-reference hidden">
-          <span class="ref-icon">📖</span>
+          <span class="ref-icon">كتاب</span>
           <span class="ref-text">
             عشان تعرف الجواب يا بطل، افتح كتابك صفحة
             <strong id="ref-page">-</strong>
@@ -116,19 +134,18 @@
 
         <h2 id="question-text">...</h2>
 
-        <div id="options-container" class="options-container">
-          <!-- الأزرار تتولد من JavaScript -->
-        </div>
+        <div id="options-container" class="options-container"></div>
 
         <div class="buttons">
-          <button class="hint-btn" onclick="showHint()">ساعدني شوي 💡</button>
+          <button class="hint-btn" onclick="showHint()">ساعدني شوي</button>
+          <button class="hint-btn" onclick="saveAndExit()">بكمل بعدين</button>
         </div>
 
         <p id="feedback" class="feedback"></p>
 
         <div id="help-box" class="help-box hidden">
           <p id="hint-text"></p>
-          <button class="primary-btn" onclick="solveTogether()">شو رأيك نحله سوا؟ 🤝</button>
+          <button class="primary-btn" onclick="solveTogether()">شو رأيك نحله سوا؟</button>
         </div>
       </div>
     </section>
@@ -139,12 +156,117 @@
         <div class="trophy">🏆</div>
         <h2>برافو عليك يا بطل!</h2>
         <p>خلصت كل الأسئلة، إنت بطل حقيقي!</p>
-        <button class="primary-btn" onclick="restart()">بدي أجرب مرة ثانية 🔄</button>
+        <p id="final-score" class="final-score"></p>
+        <button class="primary-btn" onclick="restart()">بدي أجرب مرة ثانية</button>
+      </div>
+    </section>
+
+    <!-- شاشة عن الموقع -->
+    <section id="about-screen" class="screen">
+      <div class="question-card">
+        <h2>عن الموقع</h2>
+        <p style="line-height: 2; font-size: 16px;">
+          هذا الموقع التعليمي التفاعلي مخصص لطلاب الصفين الرابع والخامس، ويهدف إلى تحويل عملية التعلم من واجب مدرسي روتيني إلى تجربة ممتعة ومحفزة.
+        </p>
+        <p style="line-height: 2; font-size: 16px;">
+          يوفر الموقع أسئلة متنوعة في مادتي اللغة العربية والرياضيات، مأخوذة من الكتاب المدرسي وأوراق العمل الداعمة الصادرة عن المركز الوطني لتطوير المناهج.
+        </p>
+        <p style="line-height: 2; font-size: 16px;">
+          يتميز الموقع بروبوت تفاعلي يشجع الطالب ويحفزه، ويقدم له التلميحات عند الحاجة، بدلاً من التأنيب عند الخطأ.
+        </p>
+        <p style="line-height: 2; font-size: 16px;">
+          الفكرة من الموقع: مساعدة الطالب على حب التعلم، وجعل الواجب المدرسي تجربة ممتعة.
+        </p>
+        <p style="line-height: 2; font-size: 16px;">
+          السبب من إنشائه: رأيت أن كثيرا من الطلاب يكرهون الواجب المدرسي، فقررت تصميم موقع يجعلهم يحبون التعلم من خلال اللعب والمرح.
+        </p>
+        <div class="buttons">
+          <button class="primary-btn" onclick="showScreen('welcome-screen')">رجوع</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- شاشة المسابقات -->
+    <section id="competitions-screen" class="screen">
+      <div class="question-card">
+        <h2>المسابقات</h2>
+        <p style="font-size: 20px; text-align: center; padding: 40px 0;">
+          لا توجد مسابقات حاليا
+        </p>
+        <div class="buttons">
+          <button class="primary-btn" onclick="showScreen('welcome-screen')">رجوع</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- شاشة عن المطور -->
+    <section id="developer-screen" class="screen">
+      <div class="question-card">
+        <h2>عن المطور</h2>
+        <p style="font-size: 18px; text-align: center; padding: 20px 0;">
+          تابعني على انستغرام:
+        </p>
+        <p style="font-size: 20px; text-align: center; padding: 10px 0; direction: ltr;">
+          <a href="https://instagram.com/mrsdfor" target="_blank">instagram.com/mrsdfor</a>
+        </p>
+        <div class="buttons">
+          <button class="primary-btn" onclick="showScreen('welcome-screen')">رجوع</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- شاشة الترخيص -->
+    <section id="license-screen" class="screen">
+      <div class="question-card">
+        <h2>ترخيص الاستخدام</h2>
+        <p style="line-height: 2; font-size: 16px;">
+          هذا الموقع مرخص تحت رخصة Apache License 2.0.
+        </p>
+        <p style="line-height: 2; font-size: 16px;">
+          يمكنك استخدام هذا الموقع وتعديله وتوزيعه بحرية، بشرط الحفاظ على حقوق الملكية والإشارة إلى المصدر.
+        </p>
+        <p style="line-height: 2; font-size: 16px;">
+          رخصة Apache License 2.0 تسمح بالاستخدام التجاري، والتعديل، والتوزيع، والاستخدام الخاص، مع حفظ حقوق النشر.
+        </p>
+        <div class="buttons">
+          <button class="primary-btn" onclick="showScreen('welcome-screen')">رجوع</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- شاشة دخول المطور -->
+    <section id="developer-login-screen" class="screen">
+      <div class="question-card">
+        <h2>دخول المطور</h2>
+        <input type="email" id="dev-email" placeholder="الإيميل..." />
+        <input type="password" id="dev-password" placeholder="كلمة السر..." />
+        <div class="buttons">
+          <button class="primary-btn" onclick="developerLogin()">دخول</button>
+          <button class="hint-btn" onclick="showScreen('welcome-screen')">رجوع</button>
+        </div>
+        <p id="dev-feedback" class="feedback"></p>
+      </div>
+    </section>
+
+    <!-- شاشة لوحة المطور -->
+    <section id="developer-dashboard" class="screen">
+      <div class="question-card">
+        <h2>لوحة المطور</h2>
+        <p>مرحبا، <strong id="dev-name">المطور</strong></p>
+        <p style="margin: 20px 0;">هنا يمكنك إدارة الأسئلة والإعدادات.</p>
+        <div class="buttons">
+          <button class="primary-btn" onclick="viewQuestions()">عرض الأسئلة</button>
+          <button class="hint-btn" onclick="developerLogout()">خروج</button>
+        </div>
+        <div id="questions-view" style="margin-top: 20px;"></div>
       </div>
     </section>
 
   </main>
 
+  <script src="firebase-config.js"></script>
+  <script src="questions-book.js"></script>
+  <script src="questions-worksheets.js"></script>
   <script src="app.js"></script>
 </body>
 </html>

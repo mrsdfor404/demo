@@ -12,7 +12,7 @@ body {
   direction: rtl;
 }
 
-/* ===== الهيدر ===== */
+/* الهيدر */
 .header {
   background: #ffffff;
   border-bottom: 1px solid #e8eef3;
@@ -22,7 +22,7 @@ body {
 }
 
 .header-inner {
-  max-width: 1100px;
+  max-width: 1200px;
   margin: 0 auto;
   padding: 16px 24px;
   display: flex;
@@ -36,6 +36,7 @@ body {
   display: flex;
   align-items: center;
   gap: 12px;
+  cursor: pointer;
 }
 
 .logo-img {
@@ -59,15 +60,17 @@ body {
 
 .nav {
   display: flex;
-  gap: 24px;
+  gap: 20px;
+  flex-wrap: wrap;
 }
 
 .nav a {
   text-decoration: none;
   color: #4a5a6a;
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 500;
   transition: color 0.2s;
+  cursor: pointer;
 }
 
 .nav a:hover,
@@ -92,7 +95,7 @@ body {
   transform: translateY(-2px);
 }
 
-/* ===== المحتوى ===== */
+/* المحتوى */
 .main {
   max-width: 1100px;
   margin: 0 auto;
@@ -102,7 +105,7 @@ body {
 .screen { display: none; }
 .screen.active { display: block; }
 
-/* ===== شاشة الترحيب ===== */
+/* شاشة الترحيب */
 .welcome-card {
   background: #ffffff;
   border-radius: 24px;
@@ -164,7 +167,7 @@ body {
   box-shadow: 0 6px 15px rgba(43,179,163,0.3);
 }
 
-/* ===== الروبوت ===== */
+/* الروبوت */
 .robot-wrapper {
   flex: 0 0 260px;
   display: flex;
@@ -325,7 +328,6 @@ body {
   75% { transform: translateX(8px); }
 }
 
-/* الروبوت ينط + يدور 360 */
 .robot.jump-spin {
   animation: jumpSpin 1.2s ease;
 }
@@ -339,7 +341,7 @@ body {
   100% { transform: translateY(0) rotate(360deg); }
 }
 
-/* ===== خيارات الاختيار من متعدد ===== */
+/* الخيارات */
 .options-container {
   display: flex;
   flex-direction: column;
@@ -415,7 +417,7 @@ body {
   color: #fff;
 }
 
-/* ===== شاشة السؤال ===== */
+/* بطاقة السؤال */
 .question-card {
   background: #ffffff;
   border-radius: 24px;
@@ -457,7 +459,6 @@ body {
   margin-right: 8px;
 }
 
-/* ===== إشارة الكتاب ===== */
 .book-reference {
   background: #fff8dc;
   border: 2px dashed #f39c12;
@@ -473,8 +474,13 @@ body {
 }
 
 .book-reference .ref-icon {
-  font-size: 22px;
+  font-size: 14px;
+  font-weight: bold;
   flex-shrink: 0;
+  background: #f39c12;
+  color: #fff;
+  padding: 4px 8px;
+  border-radius: 6px;
 }
 
 .book-reference strong {
@@ -505,6 +511,7 @@ body {
   margin-bottom: 20px;
   transition: border-color 0.2s;
   background: #f7f9fb;
+  font-family: inherit;
 }
 
 .question-card input:focus {
@@ -571,7 +578,7 @@ body {
 
 .hidden { display: none; }
 
-/* ===== شاشة الفوز ===== */
+/* شاشة الفوز */
 .win-card {
   background: #ffffff;
   border-radius: 24px;
@@ -602,11 +609,18 @@ body {
 .win-card p {
   font-size: 16px;
   color: #5a6a7a;
-  margin-bottom: 28px;
+  margin-bottom: 20px;
   line-height: 1.7;
 }
 
-/* ===== الجوال ===== */
+.final-score {
+  font-size: 22px;
+  font-weight: 700;
+  color: #2bb3a3;
+  margin: 15px 0;
+}
+
+/* الجوال */
 @media (max-width: 700px) {
   .header-inner { padding: 12px 16px; }
   .nav { display: none; }
