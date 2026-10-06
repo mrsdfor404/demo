@@ -392,7 +392,10 @@ function developerLogin() {
   const feedback = document.getElementById("dev-feedback");
 
   // التحقق من الإيميل وكلمة السر
-  if (email === "user1.9.2v0@gmail.com" && password === "Test@123456") {
+const cleanEmail = email.trim().toLowerCase();
+const cleanPassword = password.trim();
+
+if (cleanEmail === "user1.9.2v0@gmail.com" && cleanPassword === "9bMcY.DeAZQm-2!") {
     feedback.textContent = "مرحبا يا مطور!";
     feedback.className = "feedback success";
     setTimeout(() => {
