@@ -1,8 +1,14 @@
+// ===== قائمة المطورين =====
+const developers = [
+  { email: "user1.9.2v0@gmail.com", password: "Test@123456" }
+];
+
 // ===== متغيرات عامة =====
 let currentIndex = 0;
 let currentSubject = "arabic";
 let currentGrade = null;
-let currentSource = "book"; // book or worksheets
+let currentSource = "book";
+let currentBank = [];
 let currentQuestions = [];
 let answered = false;
 let studentScore = 0;
@@ -14,26 +20,29 @@ const bubble = document.getElementById("speechBubble");
 const mouth = document.getElementById("robotMouth");
 
 function robotSay(text, mood = "normal") {
+  if (!bubble || !mouth) return;
   bubble.textContent = text;
   bubble.style.animation = "none";
   setTimeout(() => bubble.style.animation = "pop 0.4s ease", 10);
-
   mouth.className = "mouth";
   if (mood === "happy") mouth.classList.add("happy");
   if (mood === "sad") mouth.classList.add("sad");
 }
 
 function robotCelebrate() {
+  if (!robot) return;
   robot.classList.add("celebrate");
   setTimeout(() => robot.classList.remove("celebrate"), 600);
 }
 
 function robotShake() {
+  if (!robot) return;
   robot.classList.add("shake");
   setTimeout(() => robot.classList.remove("shake"), 500);
 }
 
 function robotJumpAndSpin() {
+  if (!robot) return;
   robot.classList.add("jump-spin");
   setTimeout(() => robot.classList.remove("jump-spin"), 1200);
 }
@@ -48,15 +57,33 @@ function shuffleArray(array) {
   return arr;
 }
 
+// ===== خلط الأسئلة + الخيارات =====
+function prepareQuestion(q) {
+  const options = [...q.options];
+  const correctAnswer = options[q.correctIndex];
+  const shuffledOptions = shuffleArray(options);
+  const newCorrectIndex = shuffledOptions.indexOf(correctAnswer);
+
+  return {
+    ...q,
+    options: shuffledOptions,
+    correctIndex: newCorrectIndex
+  };
+}
+
 // ===== تبديل الشاشة =====
 function switchScreen(id) {
   document.querySelectorAll(".screen").forEach(s => s.classList.remove("active"));
-  document.getElementById(id).classList.add("active");
+  const screen = document.getElementById(id);
+  if (screen) {
+    screen.classList.add("active");
+  } else {
+    console.warn("الشاشة غير موجودة:", id);
+  }
 }
 
 // ===== بداية اللعبة =====
 function startGame() {
-  // إذا الطالب رجع، نكمل من مكان ما وقف
   const saved = localStorage.getItem("savedProgress");
   if (saved) {
     const data = JSON.parse(saved);
@@ -70,6 +97,12 @@ function startGame() {
         currentSource = data.currentSource;
         studentScore = data.studentScore || 0;
         currentStudent = data.currentStudent;
+
+        const subjectName = currentSubject === "arabic" ? "العربي" : "الرياضيات";
+        const sourceName = currentSource === "book" ? "الكتاب" : "أوراق العمل";
+        document.getElementById("subject-label").textContent = subjectName + " - " + sourceName;
+        document.getElementById("q-total").textContent = currentQuestions.length;
+
         switchScreen("question-screen");
         showQuestion();
         return;
@@ -146,10 +179,7 @@ function saveStudentInfo() {
 // ===== اختيار المادة =====
 function chooseSubject(subject) {
   currentSubject = subject;
-  currentIndex = 0;
-  studentScore = 0;
 
-  // إظهار شاشة اختيار المصدر
   const sourceButtons = document.getElementById("source-buttons");
   sourceButtons.innerHTML = "";
 
@@ -159,7 +189,6 @@ function chooseSubject(subject) {
   bookBtn.onclick = () => chooseSource("book");
   sourceButtons.appendChild(bookBtn);
 
-  // التحقق من وجود أوراق عمل
   const hasWorksheets = checkWorksheetsAvailable(currentGrade, subject);
   if (hasWorksheets) {
     const wsBtn = document.createElement("button");
@@ -172,7 +201,7 @@ function chooseSubject(subject) {
   switchScreen("source-screen");
 }
 
-// ===== التحقق من وجود أوراق عمل =====
+// ===== التحقق من أوراق العمل =====
 function checkWorksheetsAvailable(grade, subject) {
   if (grade === 4 && subject === "arabic") return wsArabic4.length > 0;
   if (grade === 4 && subject === "math") return wsMath4.length > 0;
@@ -200,16 +229,55 @@ function chooseSource(source) {
     if (currentGrade === 5 && currentSubject === "math") allQuestions = wsMath5;
   }
 
-  // خلط عشوائي
-  currentQuestions = shuffleArray(allQuestions);
+  // خلط الأسئلة
+  const shuffled = shuffleArray(allQuestions);
+
+  // خلط الخيارات + تحديث الإجابة الصحيحة
+  currentBank = shuffled.map(prepareQuestion);
+
+  document.getElementById("available-count").textContent = currentBank.length;
+
+  const countButtons = document.getElementById("count-buttons");
+  countButtons.innerHTML = "";
+
+  const counts = [5, 10, 15, 20];
+  counts.forEach(count => {
+    if (count <= currentBank.length) {
+      const btn = document.createElement("button");
+      btn.className = "primary-btn";
+      btn.textContent = count + " أسئلة";
+      btn.onclick = () => startQuiz(count);
+      countButtons.appendChild(btn);
+    }
+  });
+
+  const allBtn = document.createElement("button");
+  allBtn.className = "primary-btn";
+  allBtn.textContent = "كل الأسئلة (" + currentBank.length + ")";
+  allBtn.onclick = () => startQuiz(currentBank.length);
+  countButtons.appendChild(allBtn);
+
+  switchScreen("count-screen");
+}
+
+// ===== بدء الاختبار =====
+function startQuiz(count) {
+  if (count >= currentBank.length) {
+    currentQuestions = currentBank;
+  } else {
+    currentQuestions = currentBank.slice(0, count);
+  }
+
+  currentIndex = 0;
+  studentScore = 0;
 
   const subjectName = currentSubject === "arabic" ? "العربي" : "الرياضيات";
-  const sourceName = source === "book" ? "الكتاب" : "أوراق العمل";
+  const sourceName = currentSource === "book" ? "الكتاب" : "أوراق العمل";
 
   document.getElementById("subject-label").textContent = subjectName + " - " + sourceName;
   document.getElementById("q-total").textContent = currentQuestions.length;
 
-  robotSay("يلا نبدأ بـ" + subjectName + " من " + sourceName, "happy");
+  robotSay("يلا نبدأ!", "happy");
   robotCelebrate();
 
   setTimeout(() => {
@@ -228,7 +296,6 @@ function showQuestion() {
   document.getElementById("help-box").classList.add("hidden");
   document.getElementById("hint-text").textContent = q.hint || "";
 
-  // إشارة الكتاب
   const refBox = document.getElementById("book-reference");
   if (q.bookRef && currentSource === "book") {
     refBox.classList.remove("hidden");
@@ -238,7 +305,6 @@ function showQuestion() {
     refBox.classList.add("hidden");
   }
 
-  // توليد الأزرار
   const container = document.getElementById("options-container");
   container.innerHTML = "";
 
@@ -247,7 +313,11 @@ function showQuestion() {
     const btn = document.createElement("button");
     btn.className = "option-btn";
     btn.innerHTML = `<span class="option-number">${letters[index]}</span> ${option}`;
-    btn.onclick = () => selectOption(index, btn);
+    btn.onclick = (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      selectOption(index, btn);
+    };
     container.appendChild(btn);
   });
 
@@ -262,11 +332,15 @@ function selectOption(index, btn) {
   if (answered) return;
   answered = true;
 
+  // عطّل كل الأزرار
+  const allButtons = document.querySelectorAll(".option-btn");
+  allButtons.forEach(b => {
+    b.disabled = true;
+    b.style.pointerEvents = "none";
+  });
+
   const q = currentQuestions[currentIndex];
   const feedback = document.getElementById("feedback");
-  const allButtons = document.querySelectorAll(".option-btn");
-
-  allButtons.forEach(b => b.disabled = true);
 
   if (index === q.correctIndex) {
     studentScore++;
@@ -278,7 +352,9 @@ function selectOption(index, btn) {
     setTimeout(nextQuestion, 2200);
   } else {
     btn.classList.add("wrong");
-    allButtons[q.correctIndex].classList.add("correct");
+    if (allButtons[q.correctIndex]) {
+      allButtons[q.correctIndex].classList.add("correct");
+    }
 
     const msgs = [
       "معلش يا بطل، هاي بداية النجاح",
@@ -343,7 +419,6 @@ function nextQuestion() {
     robotSay("يلا سؤال جديد يا بطل", "happy");
     setTimeout(showQuestion, 1500);
   } else {
-    // انتهت الأسئلة
     localStorage.removeItem("savedProgress");
     document.getElementById("progressFill").style.width = "100%";
     document.getElementById("final-score").textContent = `نتيجتك: ${studentScore} من ${currentQuestions.length}`;
@@ -360,26 +435,18 @@ function restart() {
   robotSay("شو بتحب نلعب اليوم؟", "happy");
 }
 
-// ===== شاشات المعلومات =====
+// ===== شاشات =====
 function showScreen(id) {
   switchScreen(id);
+  if (id === "welcome-screen") {
+    robotSay("أهلا يا بطل! جاهز نتحدى؟");
+  }
 }
 
-function showAbout() {
-  switchScreen("about-screen");
-}
-
-function showCompetitions() {
-  switchScreen("competitions-screen");
-}
-
-function showDeveloper() {
-  switchScreen("developer-screen");
-}
-
-function showLicense() {
-  switchScreen("license-screen");
-}
+function showAbout() { switchScreen("about-screen"); }
+function showCompetitions() { switchScreen("competitions-screen"); }
+function showDeveloper() { switchScreen("developer-screen"); }
+function showLicense() { switchScreen("license-screen"); }
 
 // ===== دخول المطور =====
 function openDeveloperLogin() {
@@ -387,17 +454,18 @@ function openDeveloperLogin() {
 }
 
 function developerLogin() {
-  const email = document.getElementById("dev-email").value.trim();
+  const email = document.getElementById("dev-email").value.trim().toLowerCase();
   const password = document.getElementById("dev-password").value.trim();
   const feedback = document.getElementById("dev-feedback");
 
-  // التحقق من الإيميل وكلمة السر
-const cleanEmail = email.trim().toLowerCase();
-const cleanPassword = password.trim();
+  const foundDeveloper = developers.find(dev => 
+    dev.email.toLowerCase() === email && dev.password === password
+  );
 
-if (cleanEmail === "user1.9.2v0@gmail.com" && cleanPassword === "9bMcY.DeAZQm-2!") {
+  if (foundDeveloper) {
     feedback.textContent = "مرحبا يا مطور!";
     feedback.className = "feedback success";
+    document.getElementById("dev-name").textContent = email;
     setTimeout(() => {
       switchScreen("developer-dashboard");
     }, 1000);
@@ -438,4 +506,6 @@ function saveToCloud() {
   switchScreen("save-cloud-screen");
   robotSay("حفظ التقدم قيد التطوير", "happy");
 }
+
+// ===== ابدأ =====
 switchScreen("welcome-screen");
