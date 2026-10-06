@@ -258,18 +258,36 @@
       </div>
     </section>
 
-    <!-- شاشة تسجيل دخول الطالب -->
+       <!-- شاشة تسجيل دخول الطالب -->
     <section id="student-login-screen" class="screen">
       <div class="question-card">
         <h2>تسجيل دخول الطالب</h2>
-        <p style="text-align: center; margin-bottom: 20px; color: #7a8b99;">
-          قريبا: حفظ تقدمك في السحابة
+        <p style="text-align: center; margin-bottom: 20px; color: #7a8b99; font-size: 14px;">
+          اختياري — سجل دخول عشان تحفظ تقدمك
         </p>
-        <p style="text-align: center; margin-bottom: 20px; color: #7a8b99;">
-          هذا الخيار قيد التطوير
-        </p>
-        <div class="buttons">
-          <button class="primary-btn" onclick="showScreen('welcome-screen')">رجوع</button>
+
+        <div id="student-login-form">
+          <input type="email" id="student-email" placeholder="البريد الإلكتروني..." />
+          <input type="password" id="student-password" placeholder="كلمة السر..." />
+          <div class="buttons">
+            <button class="primary-btn" onclick="studentLogin()">دخول</button>
+            <button class="hint-btn" onclick="studentRegister()">تسجيل جديد</button>
+            <button class="hint-btn" onclick="showScreen('welcome-screen')">رجوع</button>
+          </div>
+          <p id="student-login-feedback" class="feedback"></p>
+        </div>
+
+        <div id="student-logged-in" class="hidden">
+          <p style="text-align: center; font-size: 18px; margin-bottom: 20px;">
+            مرحبا، <strong id="logged-student-email">طالب</strong>
+          </p>
+          <p style="text-align: center; color: #2bb3a3; margin-bottom: 20px;">
+            تقدمك محفوظ في السحابة
+          </p>
+          <div class="buttons">
+            <button class="hint-btn" onclick="studentLogout()">تسجيل خروج</button>
+            <button class="primary-btn" onclick="showScreen('welcome-screen')">رجوع</button>
+          </div>
         </div>
       </div>
     </section>
@@ -277,15 +295,13 @@
     <!-- شاشة حفظ التقدم -->
     <section id="save-cloud-screen" class="screen">
       <div class="question-card">
-        <h2>حفظ التقدم على السحابة</h2>
+        <h2>حفظ التقدم</h2>
         <p style="text-align: center; margin-bottom: 20px; color: #7a8b99;">
-          قريبا: حفظ تقدمك عشان ترجع من أي جهاز
-        </p>
-        <p style="text-align: center; margin-bottom: 20px; color: #7a8b99;">
-          هذا الخيار قيد التطوير
+          عشان تحفظ تقدمك على السحابة، لازم تسجل دخول.
         </p>
         <div class="buttons">
-          <button class="primary-btn" onclick="showScreen('welcome-screen')">رجوع</button>
+          <button class="primary-btn" onclick="openStudentLogin()">تسجيل دخول</button>
+          <button class="hint-btn" onclick="showScreen('welcome-screen')">رجوع</button>
         </div>
       </div>
     </section>
