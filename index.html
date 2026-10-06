@@ -18,14 +18,14 @@
           <span>تعلم - العب - اربح</span>
         </div>
       </div>
-    <nav class="nav">
-  <a href="#" class="active" onclick="showScreen('welcome-screen')">الرئيسية</a>
-  <a href="#" onclick="openStudentLogin()">تسجيل دخول</a>
-  <a href="#" onclick="showAbout()">عن الموقع</a>
-  <a href="#" onclick="showCompetitions()">المسابقات</a>
-  <a href="#" onclick="showDeveloper()">عن المطور</a>
-  <a href="#" onclick="showLicense()">ترخيص الاستخدام</a>
-</nav>
+      <nav class="nav">
+        <a href="#" class="active" onclick="showScreen('welcome-screen')">الرئيسية</a>
+        <a href="#" onclick="openStudentLogin()">تسجيل دخول</a>
+        <a href="#" onclick="showAbout()">عن الموقع</a>
+        <a href="#" onclick="showCompetitions()">المسابقات</a>
+        <a href="#" onclick="showDeveloper()">عن المطور</a>
+        <a href="#" onclick="showLicense()">ترخيص الاستخدام</a>
+      </nav>
       <button class="cta-btn" onclick="startGame()">يلا نبدأ</button>
     </div>
   </header>
@@ -42,11 +42,8 @@
           <p>أسئلة ممتعة بين العربي والرياضيات، مع روبوت يساعدك ويشجعك خطوة بخطوة.</p>
           <button class="primary-btn" onclick="startGame()">يلا نبدأ</button>
         </div>
-
         <div class="robot-wrapper">
-          <div class="speech-bubble" id="speechBubble">
-            أهلا يا بطل! جاهز نتحدى؟
-          </div>
+          <div class="speech-bubble" id="speechBubble">أهلا يا بطل! جاهز نتحدى؟</div>
           <div class="robot" id="robot">
             <div class="robot-antenna"></div>
             <div class="robot-head">
@@ -106,9 +103,18 @@
     <section id="source-screen" class="screen">
       <div class="question-card">
         <h2>من وين بتحب الأسئلة؟</h2>
-        <div class="buttons" id="source-buttons">
-          <!-- تتولد من JavaScript -->
-        </div>
+        <div class="buttons" id="source-buttons"></div>
+      </div>
+    </section>
+
+    <!-- شاشة اختيار عدد الأسئلة -->
+    <section id="count-screen" class="screen">
+      <div class="question-card">
+        <h2>كم سؤال بتحب تحل؟</h2>
+        <p style="text-align: center; margin-bottom: 20px; color: #7a8b99;">
+          المتوفر: <span id="available-count">0</span> سؤال
+        </p>
+        <div class="buttons" id="count-buttons"></div>
       </div>
     </section>
 
@@ -134,7 +140,6 @@
         </div>
 
         <h2 id="question-text">...</h2>
-
         <div id="options-container" class="options-container"></div>
 
         <div class="buttons">
@@ -152,18 +157,18 @@
     </section>
 
     <!-- شاشة الفوز -->
-  <section id="win-screen" class="screen">
-  <div class="win-card">
-    <div class="trophy">🏆</div>
-    <h2>برافو عليك يا بطل!</h2>
-    <p>خلصت كل الأسئلة، إنت بطل حقيقي!</p>
-    <p id="final-score" class="final-score"></p>
-    <div class="buttons">
-      <button class="primary-btn" onclick="saveToCloud()">حفظ التقدم على السحابة</button>
-      <button class="primary-btn" onclick="restart()">بدي أجرب مرة ثانية</button>
-    </div>
-  </div>
-</section>
+    <section id="win-screen" class="screen">
+      <div class="win-card">
+        <div class="trophy">🏆</div>
+        <h2>برافو عليك يا بطل!</h2>
+        <p>خلصت كل الأسئلة، إنت بطل حقيقي!</p>
+        <p id="final-score" class="final-score"></p>
+        <div class="buttons">
+          <button class="primary-btn" onclick="saveToCloud()">حفظ التقدم على السحابة</button>
+          <button class="primary-btn" onclick="restart()">بدي أجرب مرة ثانية</button>
+        </div>
+      </div>
+    </section>
 
     <!-- شاشة عن الموقع -->
     <section id="about-screen" class="screen">
@@ -173,16 +178,10 @@
           هذا الموقع التعليمي التفاعلي مخصص لطلاب الصفين الرابع والخامس، ويهدف إلى تحويل عملية التعلم من واجب مدرسي روتيني إلى تجربة ممتعة ومحفزة.
         </p>
         <p style="line-height: 2; font-size: 16px;">
-          يوفر الموقع أسئلة متنوعة في مادتي اللغة العربية والرياضيات، مأخوذة من الكتاب المدرسي وأوراق العمل الداعمة الصادرة عن المركز الوطني لتطوير المناهج.
+          يوفر الموقع أسئلة متنوعة في مادتي اللغة العربية والرياضيات، مأخوذة من الكتاب المدرسي وأوراق العمل الداعمة.
         </p>
         <p style="line-height: 2; font-size: 16px;">
-          يتميز الموقع بروبوت تفاعلي يشجع الطالب ويحفزه، ويقدم له التلميحات عند الحاجة، بدلاً من التأنيب عند الخطأ.
-        </p>
-        <p style="line-height: 2; font-size: 16px;">
-          الفكرة من الموقع: مساعدة الطالب على حب التعلم، وجعل الواجب المدرسي تجربة ممتعة.
-        </p>
-        <p style="line-height: 2; font-size: 16px;">
-          السبب من إنشائه: رأيت أن كثيرا من الطلاب يكرهون الواجب المدرسي، فقررت تصميم موقع يجعلهم يحبون التعلم من خلال اللعب والمرح.
+          يتميز الموقع بروبوت تفاعلي يشجع الطالب ويحفزه، ويقدم له التلميحات عند الحاجة، بدلا من التأنيب عند الخطأ.
         </p>
         <div class="buttons">
           <button class="primary-btn" onclick="showScreen('welcome-screen')">رجوع</button>
@@ -194,9 +193,7 @@
     <section id="competitions-screen" class="screen">
       <div class="question-card">
         <h2>المسابقات</h2>
-        <p style="font-size: 20px; text-align: center; padding: 40px 0;">
-          لا توجد مسابقات حاليا
-        </p>
+        <p style="font-size: 20px; text-align: center; padding: 40px 0;">لا توجد مسابقات حاليا</p>
         <div class="buttons">
           <button class="primary-btn" onclick="showScreen('welcome-screen')">رجوع</button>
         </div>
@@ -207,9 +204,7 @@
     <section id="developer-screen" class="screen">
       <div class="question-card">
         <h2>عن المطور</h2>
-        <p style="font-size: 18px; text-align: center; padding: 20px 0;">
-          تابعني على انستغرام:
-        </p>
+        <p style="font-size: 18px; text-align: center; padding: 20px 0;">تابعني على انستغرام:</p>
         <p style="font-size: 20px; text-align: center; padding: 10px 0; direction: ltr;">
           <a href="https://instagram.com/mrsdfor" target="_blank">instagram.com/mrsdfor</a>
         </p>
@@ -228,9 +223,6 @@
         </p>
         <p style="line-height: 2; font-size: 16px;">
           يمكنك استخدام هذا الموقع وتعديله وتوزيعه بحرية، بشرط الحفاظ على حقوق الملكية والإشارة إلى المصدر.
-        </p>
-        <p style="line-height: 2; font-size: 16px;">
-          رخصة Apache License 2.0 تسمح بالاستخدام التجاري، والتعديل، والتوزيع، والاستخدام الخاص، مع حفظ حقوق النشر.
         </p>
         <div class="buttons">
           <button class="primary-btn" onclick="showScreen('welcome-screen')">رجوع</button>
@@ -265,37 +257,39 @@
         <div id="questions-view" style="margin-top: 20px;"></div>
       </div>
     </section>
-<!-- شاشة تسجيل دخول الطالب -->
-<section id="student-login-screen" class="screen">
-  <div class="question-card">
-    <h2>تسجيل دخول الطالب</h2>
-    <p style="text-align: center; margin-bottom: 20px; color: #7a8b99;">
-      قريبا: حفظ تقدمك في السحابة
-    </p>
-    <p style="text-align: center; margin-bottom: 20px; color: #7a8b99;">
-      هذا الخيار قيد التطوير
-    </p>
-    <div class="buttons">
-      <button class="primary-btn" onclick="showScreen('welcome-screen')">رجوع</button>
-    </div>
-  </div>
-</section>
 
-<!-- شاشة حفظ التقدم -->
-<section id="save-cloud-screen" class="screen">
-  <div class="question-card">
-    <h2>حفظ التقدم على السحابة</h2>
-    <p style="text-align: center; margin-bottom: 20px; color: #7a8b99;">
-      قريبا: حفظ تقدمك عشان ترجع من أي جهاز
-    </p>
-    <p style="text-align: center; margin-bottom: 20px; color: #7a8b99;">
-      هذا الخيار قيد التطوير
-    </p>
-    <div class="buttons">
-      <button class="primary-btn" onclick="showScreen('welcome-screen')">رجوع</button>
-    </div>
-  </div>
-</section>
+    <!-- شاشة تسجيل دخول الطالب -->
+    <section id="student-login-screen" class="screen">
+      <div class="question-card">
+        <h2>تسجيل دخول الطالب</h2>
+        <p style="text-align: center; margin-bottom: 20px; color: #7a8b99;">
+          قريبا: حفظ تقدمك في السحابة
+        </p>
+        <p style="text-align: center; margin-bottom: 20px; color: #7a8b99;">
+          هذا الخيار قيد التطوير
+        </p>
+        <div class="buttons">
+          <button class="primary-btn" onclick="showScreen('welcome-screen')">رجوع</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- شاشة حفظ التقدم -->
+    <section id="save-cloud-screen" class="screen">
+      <div class="question-card">
+        <h2>حفظ التقدم على السحابة</h2>
+        <p style="text-align: center; margin-bottom: 20px; color: #7a8b99;">
+          قريبا: حفظ تقدمك عشان ترجع من أي جهاز
+        </p>
+        <p style="text-align: center; margin-bottom: 20px; color: #7a8b99;">
+          هذا الخيار قيد التطوير
+        </p>
+        <div class="buttons">
+          <button class="primary-btn" onclick="showScreen('welcome-screen')">رجوع</button>
+        </div>
+      </div>
+    </section>
+
   </main>
 
   <script src="firebase-config.js"></script>
