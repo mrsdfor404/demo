@@ -12,7 +12,6 @@ body {
   direction: rtl;
 }
 
-/* الهيدر */
 .header {
   background: #ffffff;
   border-bottom: 1px solid #e8eef3;
@@ -60,7 +59,7 @@ body {
 
 .nav {
   display: flex;
-  gap: 20px;
+  gap: 18px;
   flex-wrap: wrap;
 }
 
@@ -95,7 +94,6 @@ body {
   transform: translateY(-2px);
 }
 
-/* المحتوى */
 .main {
   max-width: 1100px;
   margin: 0 auto;
@@ -105,7 +103,6 @@ body {
 .screen { display: none; }
 .screen.active { display: block; }
 
-/* شاشة الترحيب */
 .welcome-card {
   background: #ffffff;
   border-radius: 24px;
@@ -167,7 +164,6 @@ body {
   box-shadow: 0 6px 15px rgba(43,179,163,0.3);
 }
 
-/* الروبوت */
 .robot-wrapper {
   flex: 0 0 260px;
   display: flex;
@@ -298,40 +294,24 @@ body {
   transition: all 0.3s ease;
 }
 
-.mouth.happy {
-  height: 12px;
-  border-radius: 0 0 20px 20px;
-}
+.mouth.happy { height: 12px; border-radius: 0 0 20px 20px; }
+.mouth.sad { height: 5px; border-radius: 12px 12px 0 0; }
 
-.mouth.sad {
-  height: 5px;
-  border-radius: 12px 12px 0 0;
-}
-
-.robot.celebrate {
-  animation: jump 0.6s ease;
-}
-
+.robot.celebrate { animation: jump 0.6s ease; }
 @keyframes jump {
   0%, 100% { transform: translateY(0); }
   30% { transform: translateY(-25px) rotate(-5deg); }
   60% { transform: translateY(-15px) rotate(5deg); }
 }
 
-.robot.shake {
-  animation: shake 0.5s ease;
-}
-
+.robot.shake { animation: shake 0.5s ease; }
 @keyframes shake {
   0%, 100% { transform: translateX(0); }
   25% { transform: translateX(-8px); }
   75% { transform: translateX(8px); }
 }
 
-.robot.jump-spin {
-  animation: jumpSpin 1.2s ease;
-}
-
+.robot.jump-spin { animation: jumpSpin 1.2s ease; }
 @keyframes jumpSpin {
   0% { transform: translateY(0) rotate(0deg); }
   20% { transform: translateY(-20px) rotate(0deg); }
@@ -341,7 +321,6 @@ body {
   100% { transform: translateY(0) rotate(360deg); }
 }
 
-/* الخيارات */
 .options-container {
   display: flex;
   flex-direction: column;
@@ -388,9 +367,7 @@ body {
   opacity: 0.8;
 }
 
-.option-btn:disabled:hover {
-  transform: none;
-}
+.option-btn:disabled:hover { transform: none; }
 
 @keyframes pulse {
   0%, 100% { transform: scale(1); }
@@ -417,7 +394,6 @@ body {
   color: #fff;
 }
 
-/* بطاقة السؤال */
 .question-card {
   background: #ffffff;
   border-radius: 24px;
@@ -489,9 +465,7 @@ body {
   padding: 0 4px;
 }
 
-.book-reference.hidden {
-  display: none;
-}
+.book-reference.hidden { display: none; }
 
 .question-card h2 {
   font-size: 24px;
@@ -540,9 +514,7 @@ body {
   margin: 4px;
 }
 
-.hint-btn:hover {
-  background: #ffe8dd;
-}
+.hint-btn:hover { background: #ffe8dd; }
 
 .feedback {
   font-size: 17px;
@@ -578,7 +550,6 @@ body {
 
 .hidden { display: none; }
 
-/* شاشة الفوز */
 .win-card {
   background: #ffffff;
   border-radius: 24px;
@@ -620,7 +591,26 @@ body {
   margin: 15px 0;
 }
 
-/* الجوال */
+#count-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+#count-buttons .primary-btn {
+  min-width: 120px;
+  font-size: 17px;
+  padding: 16px 24px;
+}
+
+#available-count {
+  font-weight: 700;
+  color: #2bb3a3;
+  font-size: 18px;
+}
+
 @media (max-width: 700px) {
   .header-inner { padding: 12px 16px; }
   .nav { display: none; }
