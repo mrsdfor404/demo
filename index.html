@@ -152,15 +152,18 @@
     </section>
 
     <!-- شاشة الفوز -->
-    <section id="win-screen" class="screen">
-      <div class="win-card">
-        <div class="trophy">🏆</div>
-        <h2>برافو عليك يا بطل!</h2>
-        <p>خلصت كل الأسئلة، إنت بطل حقيقي!</p>
-        <p id="final-score" class="final-score"></p>
-        <button class="primary-btn" onclick="restart()">بدي أجرب مرة ثانية</button>
-      </div>
-    </section>
+  <section id="win-screen" class="screen">
+  <div class="win-card">
+    <div class="trophy">🏆</div>
+    <h2>برافو عليك يا بطل!</h2>
+    <p>خلصت كل الأسئلة، إنت بطل حقيقي!</p>
+    <p id="final-score" class="final-score"></p>
+    <div class="buttons">
+      <button class="primary-btn" onclick="saveToCloud()">حفظ التقدم على السحابة</button>
+      <button class="primary-btn" onclick="restart()">بدي أجرب مرة ثانية</button>
+    </div>
+  </div>
+</section>
 
     <!-- شاشة عن الموقع -->
     <section id="about-screen" class="screen">
@@ -262,7 +265,37 @@
         <div id="questions-view" style="margin-top: 20px;"></div>
       </div>
     </section>
+<!-- شاشة تسجيل دخول الطالب -->
+<section id="student-login-screen" class="screen">
+  <div class="question-card">
+    <h2>تسجيل دخول الطالب</h2>
+    <p style="text-align: center; margin-bottom: 20px; color: #7a8b99;">
+      قريبا: حفظ تقدمك في السحابة
+    </p>
+    <p style="text-align: center; margin-bottom: 20px; color: #7a8b99;">
+      هذا الخيار قيد التطوير
+    </p>
+    <div class="buttons">
+      <button class="primary-btn" onclick="showScreen('welcome-screen')">رجوع</button>
+    </div>
+  </div>
+</section>
 
+<!-- شاشة حفظ التقدم -->
+<section id="save-cloud-screen" class="screen">
+  <div class="question-card">
+    <h2>حفظ التقدم على السحابة</h2>
+    <p style="text-align: center; margin-bottom: 20px; color: #7a8b99;">
+      قريبا: حفظ تقدمك عشان ترجع من أي جهاز
+    </p>
+    <p style="text-align: center; margin-bottom: 20px; color: #7a8b99;">
+      هذا الخيار قيد التطوير
+    </p>
+    <div class="buttons">
+      <button class="primary-btn" onclick="showScreen('welcome-screen')">رجوع</button>
+    </div>
+  </div>
+</section>
   </main>
 
   <script src="firebase-config.js"></script>
