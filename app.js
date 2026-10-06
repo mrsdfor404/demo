@@ -427,5 +427,15 @@ function viewQuestions() {
   view.innerHTML += "<p>رياضيات - خامس - أوراق عمل: " + wsMath5.length + " سؤال</p>";
 }
 
-// ===== ابدأ =====
+// ===== تسجيل دخول الطالب =====
+function openStudentLogin() {
+  switchScreen("student-login-screen");
+  robotSay("تسجيل الدخول قيد التطوير", "happy");
+}
+
+// ===== حفظ التقدم على السحابة =====
+function saveToCloud() {
+  switchScreen("save-cloud-screen");
+  robotSay("حفظ التقدم قيد التطوير", "happy");
+}
 switchScreen("welcome-screen");
